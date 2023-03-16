@@ -1,1 +1,1 @@
-# Calculator HTML-CSS-JS
+# Calculator App made with HTML, CSS & JS
