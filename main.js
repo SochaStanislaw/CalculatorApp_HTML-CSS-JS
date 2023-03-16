@@ -14,7 +14,7 @@ const numbersButtons = document.querySelectorAll(".number");
 const operatorsButtons = document.querySelectorAll(".operator");
 
 // znak równości:
-const equalsButton = document.querySelector(".equakls");
+const equalsButton = document.querySelector(".equals");
 
 // przycisk CLEAR do czyszczenia działań:
 const clearButton = document.querySelector(".clear");
@@ -78,15 +78,40 @@ function showResult() {
     case ":":
       result = b / a;
       break;
-    case "2^":
+    case "a^":
       result = b ** a;
       break;
   }
+
+  addToHistory();
+  historyBtn.classList.add("active");
+
+  currentNumber.innerHTML = result;
+  previousNumber.innerHTML = "";
+  mathSign.innerHTML = "";
 }
 
-function clearScreen() {}
+function addToHistory() {
+  const newHistoryItem = document.createElement("li");
+  newHistoryItem.innerHTML = `${currentNumber.innerHTML} ${mathSign.innerHTML} 
+  ${previousNumber.innerHTML} = ${result}`;
+  newHistoryItem.classList.add("history-item");
+  calculatorHistory.appendChild(newHistoryItem);
+}
 
-function clearHistory() {}
+function clearScreen() {
+  result = "";
+  currentNumber.innerHTML = "";
+  previousNumber.innerHTML = "";
+  mathSign.innerHTML = "";
+}
+
+function clearHistory() {
+  calculatorHistory.textContent = "";
+  if (calculatorHistory.textContent === "") {
+    historyBtn.classList.remove("active");
+  }
+}
 
 // nasłuchiwanie przycisków -- spoko jest to trzymać na dole:
 numbersButtons.forEach((button) =>
